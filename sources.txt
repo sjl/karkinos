@@ -1,0 +1,14 @@
+sample,runid,url
+C0,SRR6671104,https://sra-download.st-va.ncbi.nlm.nih.gov/sos2/sra-pub-run-4/SRR6671104/SRR6671104.1
+C1,SRR6671105,https://sra-download.st-va.ncbi.nlm.nih.gov/sos2/sra-pub-run-4/SRR6671105/SRR6671105.1
+C2,SRR6671106,https://sra-download.st-va.ncbi.nlm.nih.gov/sos2/sra-pub-run-4/SRR6671106/SRR6671106.1
+C3,SRR6671107,https://sra-download.st-va.ncbi.nlm.nih.gov/sos2/sra-pub-run-4/SRR6671107/SRR6671107.1
+C4,SRR6671108,https://sra-download.st-va.ncbi.nlm.nih.gov/sos2/sra-pub-run-4/SRR6671108/SRR6671108.1
+C5,SRR6671109,https://sra-download.st-va.ncbi.nlm.nih.gov/sos2/sra-pub-run-4/SRR6671109/SRR6671109.1
+C6,SRR6671110,https://sra-download.st-va.ncbi.nlm.nih.gov/sos2/sra-pub-run-4/SRR6671110/SRR6671110.1
+C7,SRR6671111,https://sra-download.st-va.ncbi.nlm.nih.gov/sos2/sra-pub-run-4/SRR6671111/SRR6671111.1
+C8,SRR6671112,https://sra-download.st-va.ncbi.nlm.nih.gov/sos2/sra-pub-run-4/SRR6671112/SRR6671112.1
+C9,SRR6671113,https://sra-download.st-va.ncbi.nlm.nih.gov/sos2/sra-pub-run-4/SRR6671113/SRR6671113.1
+N1,SRR6671114,https://sra-download.st-va.ncbi.nlm.nih.gov/sos2/sra-pub-run-4/SRR6671114/SRR6671114.1
+N2,SRR6671115,https://sra-download.st-va.ncbi.nlm.nih.gov/sos2/sra-pub-run-4/SRR6671115/SRR6671115.1
+N3,SRR6671116,https://sra-download.st-va.ncbi.nlm.nih.gov/sos2/sra-pub-run-4/SRR6671116/SRR6671116.1
