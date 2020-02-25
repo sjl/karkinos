@@ -16,4 +16,4 @@ STAR \
     --genomeDir data/03-genome-index \
     --genomeFastaFiles data/00-raw/hg38.fa \
     --outFileNamePrefix data/03-genome-index/ \
-    --sjdbGTFfile data/00-raw/hg38.refGene.gtf
+    --sjdbGTFfile data/00-raw/hg38.ncbiRefSeq.gtf

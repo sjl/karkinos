@@ -25,9 +25,4 @@ tail +2 sources.txt | cut -d, -f1,2 | while IFS=, read -r sample runid; do
        "data/01-input-fastqs/${sample}_2.fastq"
 done
 
-# Server doesn't have pigz, unfortunately.  But since we have a bunch of
-# separate FASTQ files we can just parallelize across files.
-
-# pigz --processes ${CORES} --keep ./data/01-input-fastqs/*.fastq
-
-find data/01-input-fastqs -name '*.fastq' -print0 | xargs -0 -n1 -P ${CORES} gzip
+pigz --processes ${CORES} ./data/01-input-fastqs/*.fastq
