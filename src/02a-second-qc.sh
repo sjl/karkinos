@@ -10,14 +10,14 @@ mkdir -p data/02-clean-fastqs/fastqc
 
 set -x
 
-# fastqc \
-#     --threads ${CORES} \
-#     --outdir data/02-clean-fastqs/fastqc \
-#     data/02-clean-fastqs/*.fastq.gz
+fastqc \
+    --threads ${CORES} \
+    --outdir data/02-clean-fastqs/fastqc \
+    data/02-clean-fastqs/*.fastq.gz
 
 cd data/02-clean-fastqs/fastqc
-# find . -name '*.zip' | xargs -n1 unzip
-# rm *.zip
+find . -name '*.zip' | xargs -n1 unzip
+rm *.zip
 
 grep 'Total Sequences' */fastqc_data.txt \
     | sed 's/_fastqc.*\t/ /' \

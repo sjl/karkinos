@@ -14,14 +14,14 @@ set grid y nox
 
 set ytics left offset -2.2, 0.0
 
-set key bottom right opaque box at graph 0.95, 0.05
+set key bottom right opaque box at graph 0.95, 0.05 width 1 font ",11"
 
 @bwp
 
 data = "data/02-clean-fastqs/fastqc/both_totals.txt"
 plot [20:35][-1:26] \
-    data using ($2 / 1000000.0):0:ytic(1) title "Raw" lt 4, \
-    data using ($3 / 1000000.0):0 title "After Trimming" lt 2
+    data using ($2 / 1000000.0):0:ytic(1) title "RAW" lt 4, \
+    data using ($3 / 1000000.0):0 title "AFTER FILTERING" lt 2
 
 
 set output
