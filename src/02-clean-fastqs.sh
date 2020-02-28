@@ -10,9 +10,14 @@ overrepresented_sequence_regex='CCTCACCCGGCCCGGACACGGACAGGATTGACAGATTGATAGCTCTTT
 
 ./src/log "Cleaning FASTQs (using $CORES cores)..."
 
-./src/log "TODO: Figure out how to trim these reads!"
 set -x
 
-# find data/01-input-fastqs/ -name '*.fastq.gz' -printf '%f\n' \
-#     | xargs -I FQ -n1 -P $CORES \
-#         sh -c "zcat data/01-input-fastqs/FQ | ./src/grepv-fastq '${overrepresented_sequence_regex}' | gzip > data/02-clean-fastqs/FQ"
+cat sources.txt | tail +2 | cut -d, -f1 \
+    | xargs -I ID -n1 -P $CORES \
+        bash -c "./src/filter-fastq.py '$overrepresented_sequence_regex' \
+                    <(zcat data/01-input-fastqs/ID_1.fastq.gz) \
+                    <(zcat data/01-input-fastqs/ID_2.fastq.gz) \
+                    data/02-clean-fastqs/ID_1.fastq \
+                    data/02-clean-fastqs/ID_2.fastq"
+
+pigz data/02-clean-fastqs/*.fastq
