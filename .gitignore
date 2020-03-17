@@ -1,4 +1,4 @@
 data
-graph.pdf
+*.pdf
 
 *.lisp

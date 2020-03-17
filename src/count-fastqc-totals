@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+# USAGE: count-fastqc-totals ./data/06-foo/fastqc
+# to produce ./data/06-foo/fastqc/totals.txt
+
+set -euo pipefail
+
+./src/log "Counting FastQC totals for $1..."
+
+set -x
+
+cd "$1"
+
+find . -name '*.zip' | xargs -n1 unzip
+rm *.zip
+
+grep 'Total Sequences' */fastqc_data.txt \
+    | sed 's/_fastqc.*\t/ /' \
+    | sort \
+    > totals.txt

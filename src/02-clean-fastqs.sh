@@ -6,18 +6,22 @@ CORES=${CORES:=2}
 
 mkdir -p data/02-clean-fastqs
 
-overrepresented_sequence_regex='CCTCACCCGGCCCGGACACGGACAGGATTGACAGATTGATAGCTCTTTCT|CTCACCCGGCCCGGACACGGACAGGATTGACAGATTGATAGCTCTTTCTC|CTGGAGTGCAGTGGCTATTCACAGGCGCGATCCCACTACTGATCAGCACG|CTGGAGTCTTGGAAGCTTGACTACCCTACGTTCTCCTACAAATGGACCTT|CTGCCAGTAGCATATGCTTGTCTCAAAGATTAAGCCATGCATGTCTAAGT|CGGACATCTAAGGGCATCACAGACCTGTTATTGCTCAATCTCGGGTGGCT'
-
 ./src/log "Cleaning FASTQs (using $CORES cores)..."
 
 set -x
 
-cat sources.txt | tail +2 | cut -d, -f1 \
-    | xargs -I ID -n1 -P $CORES \
-        bash -c "./src/filter-fastq.py '$overrepresented_sequence_regex' \
-                    <(zcat data/01-input-fastqs/ID_1.fastq.gz) \
-                    <(zcat data/01-input-fastqs/ID_2.fastq.gz) \
-                    data/02-clean-fastqs/ID_1.fastq \
-                    data/02-clean-fastqs/ID_2.fastq"
+./src/log "Removing duplicate sequences with ParDRe..."
+for mismatches in 0 1 2
+do
+    mkdir -p "data/02-clean-fastqs/dedupe-${mismatches}/"
 
-pigz data/02-clean-fastqs/*.fastq
+    tail +2 sources.txt | tail +3 | cut -d, -f1 | while IFS=, read -r sample; do
+        ParDRe \
+            -i "data/01-input-fastqs/${sample}_1.fastq" \
+            -p "data/01-input-fastqs/${sample}_2.fastq" \
+            -o "data/02-clean-fastqs/dedupe-${mismatches}/${sample}_1.fastq" \
+            -r "data/02-clean-fastqs/dedupe-${mismatches}/${sample}_2.fastq" \
+            -m $mismatches \
+            -t $CORES
+    done
+done
