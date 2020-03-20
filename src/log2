@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+printf "\e[36m" >&2
+echo "$@" >&2
+printf "\e[0m" >&2

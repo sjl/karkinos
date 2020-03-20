@@ -18,7 +18,7 @@ set key top left opaque box at graph 0.05, 0.95 font ",11" height 1
 
 @bwp
 
-data = "data/02-clean-fastqs/totals.txt"
+data = "data/02-deduped-fastqs/totals.txt"
 plot [0:35][-1:26] \
     data using ($2 / 1000000.0):0:ytic(1) title "Raw" lt 1, \
     data using ($3 / 1000000.0):0 title "Deduped (0 mismatches)"   lt 3, \

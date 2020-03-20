@@ -10,7 +10,7 @@ set -x
 
 for mismatches in 0 1 2
 do
-    indir="data/02-clean-fastqs/dedupe-${mismatches}"
+    indir="data/02-deduped-fastqs/dedupe-${mismatches}"
     qcdir="${indir}/fastqc"
 
     mkdir -p "${qcdir}"
@@ -24,8 +24,8 @@ do
 done
 
 sort data/01-input-fastqs/fastqc/totals.txt \
-    | join --check-order - <(sort data/02-clean-fastqs/dedupe-0/fastqc/totals.txt) \
-    | join --check-order - <(sort data/02-clean-fastqs/dedupe-1/fastqc/totals.txt) \
-    | join --check-order - <(sort data/02-clean-fastqs/dedupe-2/fastqc/totals.txt) \
+    | join --check-order - <(sort data/02-deduped-fastqs/dedupe-0/fastqc/totals.txt) \
+    | join --check-order - <(sort data/02-deduped-fastqs/dedupe-1/fastqc/totals.txt) \
+    | join --check-order - <(sort data/02-deduped-fastqs/dedupe-2/fastqc/totals.txt) \
     | sort -r \
-    > data/02-clean-fastqs/totals.txt
+    > data/02-deduped-fastqs/totals.txt
