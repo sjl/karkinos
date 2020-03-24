@@ -6,13 +6,18 @@ CORES=${CORES:=2}
 
 ./src/log "Aligning reads (using $CORES cores)..."
 
+mkdir -p data/05-alignment
+
 set -x
 
 genome=data/04-genome-index
 sortram=20000000000
 
 function cleanup {
-    STAR --genomeDir "${genome}" --genomeLoad Remove
+    STAR \
+        --outFileNamePrefix "data/05-alignment" \
+        --genomeDir "${genome}" \
+        --genomeLoad Remove
 }
 
 trap cleanup EXIT
@@ -28,7 +33,7 @@ function align {
     if test -f "${outdir}/${sample}.bam"; then
         ./src/log2 "${outdir}/${sample}.bam already exists, skipping."
     else
-        ./src/log2 "Aligning ${sample}..."
+        ./src/log2 "Aligning to ${outdir}..."
         STAR \
             --runMode alignReads \
             --runThreadN $CORES \
@@ -36,6 +41,7 @@ function align {
             --genomeLoad LoadAndKeep \
             --limitBAMsortRAM "${sortram}" \
             --outSAMtype BAM SortedByCoordinate \
+            --outSAMstrandField intronMotif \
             --outBAMcompression 0 \
             --outBAMsortingThreadN $CORES \
             --outFileNamePrefix "${outdir}/" \
@@ -43,31 +49,8 @@ function align {
 
         mv "${outdir}/Aligned.sortedByCoord.out.bam" "${outdir}/${sample}.bam"
         samtools index -@ $CORES "${outdir}/${sample}.bam"
-
-        # ./src/log2 "Converting SAM to BAM..."
-        # samtools view -@ $CORES -S -u -b \
-        #     "${outdir}/Aligned.out.sam" \
-        # > "${outdir}/${sample}.unsorted.bam"
-
-        # ./src/log2 "Sorting BAM..."
-        # samtools sort -@ $CORES -l 0 -m 2G \
-        #     "${outdir}/${sample}.unsorted.bam" \
-        # > "${outdir}/${sample}.bam"
-
-        # ./src/log2 "Converting SAM to BAM..."
-        # samtools view -@ $CORES -S -u -b "${outdir}/Aligned.out.sam" \
-        # | samtools sort -@ $CORES -l 0 -m 2G -
-        # | pv > "${outdir}/${sample}.bam"
-
-        # ./src/log2 "Indexing BAM..."
-        # samtools index -@ $CORES "${outdir}/${sample}.bam"
-
-        # ./src/log2 "Cleaning up..."
-        # rm "${outdir}/Aligned.out.sam"
     fi
 }
-
-STAR --genomeDir "${genome}" --genomeLoad LoadAndExit
 
 tail +2 sources.txt | cut -d, -f1 | while read -r sample; do
     ./src/log "Aligning ${sample}..."
