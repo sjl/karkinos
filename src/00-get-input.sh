@@ -7,7 +7,7 @@ CORES=${CORES:=2}
 mkdir -p data/00-raw
 
 ./src/log "Retrieving files..."
-tail +2 sources.txt | cut -d, -f3 \
+tail -n +2 sources.txt | cut -d, -f3 \
     | xargs wget --continue --directory-prefix=data/00-raw
 
 cd data/00-raw

@@ -16,7 +16,7 @@ do
 
     mkdir -p "data/02-deduped-fastqs/dedupe-${mismatches}/"
 
-    tail +2 sources.txt | cut -d, -f1 | while IFS=, read -r sample; do
+    tail -n +2 sources.txt | cut -d, -f1 | while IFS=, read -r sample; do
         ParDRe \
             -i "data/01-input-fastqs/${sample}_1.fastq" \
             -p "data/01-input-fastqs/${sample}_2.fastq" \

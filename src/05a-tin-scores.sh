@@ -10,13 +10,13 @@ mkdir -p data/05-alignment/tin
 
 set -x
 
-tail +2 sources.txt | cut -d, -f1 | \
+tail -n +2 sources.txt | cut -d, -f1 | \
     xargs -I SAMPLE -n1 -P $CORES -- \
         tin.py \
             --input   data/05-alignment/clean/SAMPLE/SAMPLE.bam \
             --refgene data/00-raw/hg38_RefSeq.bed
 
-tail +2 sources.txt | cut -d, -f1 | while read -r sample; do
+tail -n +2 sources.txt | cut -d, -f1 | while read -r sample; do
     mv -t data/05-alignment/tin ${sample}.*
 done
 

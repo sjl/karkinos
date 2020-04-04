@@ -10,7 +10,7 @@ mkdir -p data/01-input-fastqs
 
 set -x
 
-tail +2 sources.txt | cut -d, -f1,2 | while IFS=, read -r sample runid; do
+tail -n +2 sources.txt | cut -d, -f1,2 | while IFS=, read -r sample runid; do
     fasterq-dump \
         --progres \
         --threads ${CORES} \

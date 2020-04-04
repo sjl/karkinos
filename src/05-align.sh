@@ -52,7 +52,7 @@ function align {
     fi
 }
 
-tail +2 sources.txt | cut -d, -f1 | while read -r sample; do
+tail -n +2 sources.txt | cut -d, -f1 | while read -r sample; do
     ./src/log "Aligning ${sample}..."
 
     align "${sample}" \

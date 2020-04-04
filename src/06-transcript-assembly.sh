@@ -14,7 +14,7 @@ set -x
 
 rm -f $assemblies
 
-tail +2 sources.txt | cut -d, -f1 | while read -r sample; do
+tail -n +2 sources.txt | cut -d, -f1 | while read -r sample; do
     ./src/log2 "Building ${sample}..."
 
     outdir="data/06-transcript-assemblies/${sample}"
