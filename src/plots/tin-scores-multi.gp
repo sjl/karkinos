@@ -14,7 +14,7 @@ set ytic 0.25
 set format y ""
 
 set multiplot \
-    title "TIN Score Distributions by Sample" font ",14" \
+    title "TIN CDFs by Sample" font ",14" \
     layout 3,5
 
 do for[c=0:9] {
@@ -42,7 +42,7 @@ set termoption fontscale "0.1"
 set title "{/*0.9 Key}"
 
 set ylabel "{/*0.9 CDF}"
-set xlabel "{/*0.9 TIN Score}"
+set xlabel "{/*0.9 TIN}"
 set format x "{/*0.9 %g}"
 set format y "{/*0.9 %.2f}"
 
