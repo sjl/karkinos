@@ -1,9 +1,10 @@
 set terminal push
 
-set terminal pdfcairo size 7in,5in
-set output "tin-scores-mp.pdf"
+# set terminal pdfcairo size 7in,5in
+# set output "tin-scores-mp.pdf"
 
-# set terminal pngcairo size 1000,570
+set terminal pngcairo size 1000,570
+set output "tin-scores-mp.png"
 
 set termoption font ",12"
 

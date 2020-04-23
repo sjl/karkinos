@@ -1,8 +1,7 @@
 set terminal push
-set terminal pdfcairo size 7in, 5in
+# set terminal cairo size 7in, 5in
+set terminal pngcairo size 700,500 fontscale 0.9
 set output ARG1
-
-set termoption font ",12"
 
 set title "Read counts of individual FASTQ files"
 set xlabel "Reads (millions)"
